@@ -1,0 +1,6 @@
+/personal_assistant/.env
+/personal_assistant/db.sqlite3
+.idea
+__pycache__
+/data/
+/.env
