@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact List</title>
+</head>
+<body>
+    <h1>Contact List</h1>
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                {{ contact.name }} - {{ contact.phone_number }}
+                (<a href="{% url 'edit_contact' contact.id %}">Edit</a>)
+                (<a href="{% url 'delete_contact' contact.id %}">Delete</a>)
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

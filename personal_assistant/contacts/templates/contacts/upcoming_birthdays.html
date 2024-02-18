@@ -1,0 +1,20 @@
+<!-- templates/contacts/upcoming_birthdays.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Birthdays</title>
+</head>
+<body>
+    <h1>Upcoming Birthdays</h1>
+    
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <ul>
+            {% for contact in contacts %}
+                <li>{{ contact.name }} - {{ contact.birthday|date:"F j" }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

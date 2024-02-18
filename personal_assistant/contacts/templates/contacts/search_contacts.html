@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Contacts</title>
+</head>
+<body>
+    <h1>Search Contacts</h1>
+    <form method="get" action="{% url 'search_contacts' %}">
+        <input type="text" name="q" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <ul>
+            {% for contact in contacts %}
+                <li>{{ contact.name }} - {{ contact.phone_number }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
