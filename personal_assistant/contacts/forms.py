@@ -20,4 +20,9 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
-        fields = ['name', 'address', 'phone_number', 'email', 'birthday']
+        fields = ['first_name','last_name', 'address', 'phone_number', 'email', 'birthday']
+
+class UpcomingBirthdaysForm(forms.Form):
+    days = forms.IntegerField(label='Enter the number of days', required=False)
+
+    

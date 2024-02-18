@@ -1,8 +1,10 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Contact
 from .forms import ContactForm
+from .forms import UpcomingBirthdaysForm
 from django.db.models import Q
+from datetime import timedelta
 
 
 def contact_list(request):
@@ -14,11 +16,14 @@ def upcoming_birthdays(request, days=7):
     end_date = today + timedelta(days=int(days))
     contacts = Contact.objects.filter(birthday__range=[today, end_date])
 
+    form = UpcomingBirthdaysForm()
+
+    context = {'contacts': contacts, 'form': form}
     if not contacts:
-        error_message = "No contacts found with upcoming birthdays."
-        return render(request, 'contacts/upcoming_birthdays.html', {'error_message': error_message})
-    
-    return render(request, 'contacts/upcoming_birthdays.html', {'contacts': contacts})
+        context['error_message'] = "No contacts found with upcoming birthdays."
+
+    return render(request, 'contacts/upcoming_birthdays.html', context)
+
 def create_or_edit_contact(request, contact_id=None):
     
     contact = get_object_or_404(Contact, pk=contact_id) if contact_id else None
@@ -38,7 +43,8 @@ def search_contacts(request):
 
     if query:
         contacts = Contact.objects.filter(
-            Q(name__icontains=query) |
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query) |
             Q(address__icontains=query) |
             Q(phone_number__icontains=query) |
             Q(email__icontains=query)

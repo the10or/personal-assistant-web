@@ -8,7 +8,7 @@
     <ul>
         {% for contact in contacts %}
             <li>
-                {{ contact.name }} - {{ contact.phone_number }}
+                {{ contact.first_name }} {{ contact.last_name }} - {{ contact.phone_number }}
                 (<a href="{% url 'edit_contact' contact.id %}">Edit</a>)
                 (<a href="{% url 'delete_contact' contact.id %}">Delete</a>)
             </li>

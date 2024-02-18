@@ -15,7 +15,7 @@
     {% else %}
         <ul>
             {% for contact in contacts %}
-                <li>{{ contact.name }} - {{ contact.phone_number }}</li>
+                <li>{{ contact.first_name }} {{ contact.last_name }} - {{ contact.phone_number }}</li>
             {% endfor %}
         </ul>
     {% endif %}
