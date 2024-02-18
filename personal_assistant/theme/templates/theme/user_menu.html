@@ -10,33 +10,21 @@
                 <ul class="py-2" aria-labelledby="user-menu-button">
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'users:dashboard' %}"
+                        <a href="#"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{% url 'users:add_quote' %}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Add Quote</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'users:add_author' %}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Add Author</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'users:add_tag' %}"
-                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Add Tag</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'users:sign_out' %}"
+                        <a href="{% url 'user_auth:sign_out' %}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
                             out</a>
                     </li>
                     {% else %}
                     <li>
-                        <a href="{% url 'users:login' %}"
+                        <a href="{% url 'user_auth:signin' %}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Login</a>
                     </li>
                     <li>
-                        <a href="{% url 'users:register' %}"
+                        <a href="{% url 'user_auth:register' %}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Register</a>
                     </li>
                     {% endif %}
