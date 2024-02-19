@@ -73,12 +73,11 @@ def search_contacts(request):
             Q(email__icontains=query)
         )
 
-    if not contacts:
-        error_message = "No contacts found matching the search criteria."
-        return render(request, 'contacts/search_contacts.html', {'error_message': error_message, 'query': query})
+        if not contacts:
+            error_message = "No contacts found matching the search criteria."
+            return render(request, 'contacts/search_contacts.html', {'error_message': error_message, 'query': query})
 
     return render(request, 'contacts/search_contacts.html', {'contacts': contacts, 'query': query})
-
 
 def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
