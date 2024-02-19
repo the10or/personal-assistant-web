@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% if contact %}Edit Contact{% else %}Create Contact{% endif %}</title>
-</head>
-<body>
-    <h1>{% if contact %}Edit Contact{% else %}Create Contact{% endif %}</h1>
-    <form method="post" action="{% if contact %}{% url 'edit_contact' contact.id %}{% else %}{% url 'create_contact' %}{% endif %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-</body>
-</html>
+{% extends "theme/base.html" %}
+
+{% block content %}
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <h1>{% if contact %}Edit Contact{% else %}Create Contact{% endif %}</h1>
+        <form method="post"
+              action="{% if contact %}{% url 'edit_contact' contact.id %}{% else %}{% url 'create_contact' %}{% endif %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

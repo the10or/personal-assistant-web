@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact List</title>
-</head>
-<body>
-    <h1>Contact List</h1>
-    <ul>
-        {% for contact in contacts %}
-            <li>
-                {{ contact.first_name }} {{ contact.last_name }} - {{ contact.phone_number }}
-                (<a href="{% url 'edit_contact' contact.id %}">Edit</a>)
-                (<a href="{% url 'delete_contact' contact.id %}">Delete</a>)
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "theme/base.html" %}
+
+{% block content %}
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="items-center justify-center pt-10 pb-3">
+            <h1 class="text-5xl mb-5">Contact list</h1>
+        </div>
+        <div class="text-white grid grid-cols-4 gap-4 items-center mb-5 justify-center">
+                {% for contact in contacts %}
+                <div class="block w-1/2 p-5 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
+                    <p>{{ contact.first_name }} {{ contact.last_name }}</p>
+                    <p>{{ contact.phone_number }}</p>
+                    (<a href="{% url 'edit_contact' contact.id %}">Edit</a>)
+                    (<a href="{% url 'delete_contact' contact.id %}">Delete</a>)
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
