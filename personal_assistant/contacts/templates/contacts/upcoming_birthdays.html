@@ -6,8 +6,9 @@
 <body>
     <h1>Upcoming Birthdays</h1>
 
-    <form method="get" action="{% url 'upcoming_birthdays' %}">
+    <form method="post" action="{% url 'upcoming_birthdays' %}">
         {{ form }}
+        {% csrf_token %}
         <button type="submit">Submit</button>
     </form>
       

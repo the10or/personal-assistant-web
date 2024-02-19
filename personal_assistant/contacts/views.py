@@ -1,22 +1,43 @@
-from datetime import date, timedelta, timezone
+from datetime import date, timedelta
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Contact
+from django.db.models import Q
+
 from .forms import ContactForm
 from .forms import UpcomingBirthdaysForm
-from django.db.models import Q
-from datetime import timedelta
+from .models import Contact
 
 
 def contact_list(request):
     contacts = Contact.objects.all()
     return render(request, 'contacts/contact_list.html', {'contacts': contacts})
 
-def upcoming_birthdays(request, days=7):
-    today = date.today()
-    end_date = today + timedelta(days=int(days))
-    contacts = Contact.objects.filter(birthday__range=[today, end_date])
 
-    form = UpcomingBirthdaysForm()
+def upcoming_birthdays(request):
+    days = int(request.POST.get('days', "7"))
+    today = date.today()
+
+    # Filter for birthdays in the range
+    conditions = []
+
+    # Iterate over the range of days
+    for delta in range(days):
+        day_to_check = today + timedelta(days=delta)
+        day_month_str = day_to_check.strftime("%m-%d")  # Format to 'MM-DD'
+
+        # Using icontains to match the date format in the database
+        conditions.append(
+            Q(birthday__icontains=day_month_str)
+        )
+
+    # Combine all conditions with OR
+    query = conditions.pop()
+    for condition in conditions:
+        query |= condition
+
+    # Query the database
+    contacts = Contact.objects.filter(query)
+
+    form = UpcomingBirthdaysForm(request.POST)
 
     context = {'contacts': contacts, 'form': form}
     if not contacts:
@@ -24,8 +45,8 @@ def upcoming_birthdays(request, days=7):
 
     return render(request, 'contacts/upcoming_birthdays.html', context)
 
+
 def create_or_edit_contact(request, contact_id=None):
-    
     contact = get_object_or_404(Contact, pk=contact_id) if contact_id else None
 
     if request.method == 'POST':
@@ -37,6 +58,7 @@ def create_or_edit_contact(request, contact_id=None):
         form = ContactForm(instance=contact)
 
     return render(request, 'contacts/create_or_edit_contact.html', {'form': form, 'contact': contact})
+
 
 def search_contacts(request):
     query = request.GET.get('q', '')
@@ -57,6 +79,7 @@ def search_contacts(request):
         return render(request, 'contacts/search_contacts.html', {'error_message': error_message})
 
     return render(request, 'contacts/search_contacts.html', {'contacts': contacts, 'query': query})
+
 
 def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
