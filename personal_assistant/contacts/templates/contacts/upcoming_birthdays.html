@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Birthdays</title>
+</head>
+<body>
+    <h1>Upcoming Birthdays</h1>
+
+    <form method="post" action="{% url 'upcoming_birthdays' %}">
+        {{ form }}
+        {% csrf_token %}
+        <button type="submit">Submit</button>
+    </form>
+      
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% else %}
+        <ul>
+            {% for contact in contacts %}
+                <li>{{ contact.first_name }} {{contact.last_name}} - {{ contact.birthday|date:"F j" }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
