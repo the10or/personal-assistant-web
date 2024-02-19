@@ -5,6 +5,7 @@ from django.db.models import Q
 from .forms import ContactForm
 from .forms import UpcomingBirthdaysForm
 from .models import Contact
+from django.http import HttpResponseNotFound
 
 
 def contact_list(request):
@@ -59,9 +60,9 @@ def create_or_edit_contact(request, contact_id=None):
 
     return render(request, 'contacts/create_or_edit_contact.html', {'form': form, 'contact': contact})
 
-
 def search_contacts(request):
     query = request.GET.get('q', '')
+    contacts = []
 
     if query:
         contacts = Contact.objects.filter(
@@ -71,12 +72,10 @@ def search_contacts(request):
             Q(phone_number__icontains=query) |
             Q(email__icontains=query)
         )
-    else:
-        contacts = Contact.objects.all()
 
     if not contacts:
         error_message = "No contacts found matching the search criteria."
-        return render(request, 'contacts/search_contacts.html', {'error_message': error_message})
+        return render(request, 'contacts/search_contacts.html', {'error_message': error_message, 'query': query})
 
     return render(request, 'contacts/search_contacts.html', {'contacts': contacts, 'query': query})
 
