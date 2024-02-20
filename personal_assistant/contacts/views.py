@@ -15,7 +15,15 @@ def contact_list(request):
 
 
 def upcoming_birthdays(request):
-    days = int(request.POST.get('days', "7"))
+    days = request.POST.get('days', "7")
+    form = UpcomingBirthdaysForm(request.POST)
+
+    if not days:
+        context = {'contacts': None, 'form': form}
+        return render(request, 'contacts/upcoming_birthdays.html', context)
+    
+    days = int(days)
+    
     today = date.today()
 
     # Filter for birthdays in the range
@@ -39,7 +47,6 @@ def upcoming_birthdays(request):
     # Query the database
     contacts = Contact.objects.filter(query)
 
-    form = UpcomingBirthdaysForm(request.POST)
 
     context = {'contacts': contacts, 'form': form}
     if not contacts:
