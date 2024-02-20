@@ -1,23 +1,42 @@
+
+
 {% extends "theme/base.html" %}
 
 {% block content %}
 <div class="form-content my-3 p-3">
     <div class="container">
-        <h1>Search Contacts</h1>
-        <form method="get" action="{% url 'search_contacts' %}">
-            <input type="text" name="q" value="{{ query }}">
-            <button type="submit">Search</button>
-        </form>
+        <div class="pt-10 pb-3">
+            <h1 class="text-center text-5xl mb-5">Search Contacts</h1>
+        </div>
+        
+        <div class="pb-2">
+            {% include 'contacts/actions_menu.html' %}
+        </div>
+        <div class="flex">
+            <div class="p-5 w-20-px">
+                <form method="get" action="{% url 'search_contacts' %}">
+                {% csrf_token %}
+                <input type="text" name="q" value="{{ query }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-        {% if error_message %}
-        <p>{{ error_message }}</p>
-        {% else %}
-        <ul>
-            {% for contact in contacts %}
-            <li>{{ contact.first_name }} {{ contact.last_name }} - {{ contact.phone_number }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+                <button class="m-1 w-15 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="submit">Search</button>
+                </form>
+                {% if error_message %}
+                <p>{{ error_message }}</p>
+                {% else %}
+            </div>
+            <div class="p-5 pt-8 w-4/5">
+                <div>
+                    {% for contact in contacts %}
+                    <div class="block m-2 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
+                        <div class="text-white p-2 m-2">
+                            {{ contact.first_name }} {{ contact.last_name }} - {{ contact.phone_number }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}
