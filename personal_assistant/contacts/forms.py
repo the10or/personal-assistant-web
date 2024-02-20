@@ -30,4 +30,4 @@ class ContactForm(forms.ModelForm):
 
 
 class UpcomingBirthdaysForm(forms.Form):
-    days = forms.IntegerField(label='Enter the number of days', initial=7, required=False, min_value=1)
+    days = forms.IntegerField(label='Enter the number of days', initial=7, required=False, min_value=1, widget=forms.NumberInput(attrs={'class': form_style}))
