@@ -1,6 +1,7 @@
 from datetime import date, timedelta
-from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ContactForm
 from .forms import UpcomingBirthdaysForm
@@ -55,6 +56,10 @@ def create_or_edit_contact(request, contact_id=None):
         if form.is_valid():
             form.save()
             return redirect('contact_list')
+        elif form.has_error('phone_number'):
+            messages.error(request, 'Please enter correct phone number.')
+        elif form.has_error('email'):
+            messages.error(request, 'Please enter correct email.')
     else:
         form = ContactForm(instance=contact)
 
