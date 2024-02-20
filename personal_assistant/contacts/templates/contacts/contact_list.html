@@ -6,6 +6,11 @@
         <div class="pt-10 pb-3">
             <h1 class="text-center text-5xl mb-5">Contact list</h1>
         </div>
+        
+        <div class="pb-2">
+            {% include 'contacts/actions_menu.html' %}
+        </div>
+
         <div class="text-white grid grid-cols-4 gap-4 items-center mb-5 justify-center">
                 {% for contact in contacts %}
                 <div class="block p-5 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
