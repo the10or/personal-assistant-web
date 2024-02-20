@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -48,16 +48,16 @@ def sign_in(request):
     :doc-author: Trelent
     """
     if request.user.is_authenticated:
-        return redirect(to="user_auth:signin")  # TODO
+        return redirect(to="contacts:contact_list")
     if request.method == "POST":
         user = authenticate(
             username=request.POST["username"], password=request.POST["password"]
         )
         if user is None:
             messages.error(request, "Username or password didn't match")
-            return redirect(to="user_auth:signin")  # TODO
+            return redirect(to="user_auth:register")
         login(request, user)
-        return redirect(to="user_auth:signin")  # TODO
+        return redirect(to="contacts:contact_list")  # TODO
     return render(request, "user_auth/login.html", context={"form": LoginForm()})
 
 
@@ -76,4 +76,9 @@ class EmailOnlyPasswordResetView(PasswordResetView):
 class SignOutView(View):
     def get(self, request):
         logout(request)
-        return redirect(to="user_auth:index")  # TODO
+        return redirect(to="user_auth:signin")
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'user_auth/password_reset_confirm.html' 
+    success_url = reverse_lazy("user_auth:password_reset_complete")

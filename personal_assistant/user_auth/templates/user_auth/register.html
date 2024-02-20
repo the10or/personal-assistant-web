@@ -9,12 +9,18 @@
         {% csrf_token %}
         <div class="mb-5">
             <label for="id_username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                Email:
+                Username:
             </label>
             {{ form.username }}
             <span class="text-red-500 flex items-center space-x-3 rtl:space-x-reverse">{{ form.errors.username }}</span>
         </div>
-
+        <div class="mb-5">
+            <label for="id_email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                Email:
+            </label>
+            {{ form.email }}
+            <span class="text-red-500 flex items-center space-x-3 rtl:space-x-reverse">{{ form.errors.username }}</span>
+        </div>
         <div class="mb-5">
             <label for="id_password1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
                 Password:

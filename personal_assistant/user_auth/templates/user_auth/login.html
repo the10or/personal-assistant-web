@@ -15,7 +15,7 @@
     <form action="{% url 'user_auth:signin' %}" method="post" class="max-w-sm mx-auto mt-10">
         {% csrf_token %}
         <div class="mb-5">
-            <label> Email:
+            <label> Username:
                 {{ form.username }}
             </label>
         </div>
