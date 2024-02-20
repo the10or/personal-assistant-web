@@ -11,7 +11,7 @@
         <div class="flex">
 
             <form method="post" class="max-w-sm mx-auto mt-10"
-              action="{% if contact %}{% url 'edit_contact' contact.id %}{% else %}{% url 'create_contact' %}{% endif %}">
+              action="{% if contact %}{% url 'contacts:edit_contact' contact.id %}{% else %}{% url 'contacts:create_contact' %}{% endif %}">
             {% csrf_token %}
                 {% if messages %}
                 <div>

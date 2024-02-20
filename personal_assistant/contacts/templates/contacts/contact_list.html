@@ -19,10 +19,10 @@
                     <div class="pt-2 flex flex-row float-right">
 
                         <div class="inline pr-2 pl-2">
-                            <a class="text-blue-500" href="{% url 'edit_contact' contact.id %}">Edit</a>
+                            <a class="text-blue-500" href="{% url 'contacts:edit_contact' contact.id %}">Edit</a>
                         </div>
                         <div class="inline pr-2 pl-2">
-                            <a class="text-red-500" href="{% url 'delete_contact' contact.id %}">Delete</a>
+                            <a class="text-red-500" href="{% url 'contacts:delete_contact' contact.id %}">Delete</a>
                         </div>
                     </div>
                 </div>

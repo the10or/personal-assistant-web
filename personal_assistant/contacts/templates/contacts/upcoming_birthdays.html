@@ -12,7 +12,7 @@
         </div>
         <div class="flex">
             <div class="p-5 w-20-px">
-                <form method="post" action="{% url 'upcoming_birthdays' %}">
+                <form method="post" action="{% url 'contacts:upcoming_birthdays' %}">
                 {% csrf_token %}
                 <label> Days:
                     {{ form.days }}
