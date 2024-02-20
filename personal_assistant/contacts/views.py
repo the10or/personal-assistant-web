@@ -15,7 +15,7 @@ def contact_list(request):
 
 
 def upcoming_birthdays(request):
-    days = request.POST.get('days', "7")
+    days = request.POST.get('days')
     form = UpcomingBirthdaysForm(request.POST)
 
     if not days:
