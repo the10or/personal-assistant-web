@@ -8,7 +8,12 @@ form_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.EmailField(
+    username = UsernameField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"autofocus": True, "class": form_style}),
+    )
+    email = forms.EmailField(
         max_length=100,
         required=True,
         widget=forms.TextInput(attrs={"class": form_style}),
@@ -26,7 +31,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ["username", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2"]
 
 
 class LoginForm(AuthenticationForm):

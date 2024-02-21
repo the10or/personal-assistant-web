@@ -1,6 +1,7 @@
 from datetime import date, timedelta
-from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import ContactForm
 from .forms import UpcomingBirthdaysForm
@@ -14,7 +15,15 @@ def contact_list(request):
 
 
 def upcoming_birthdays(request):
-    days = int(request.POST.get('days', "7"))
+    days = request.POST.get('days')
+    form = UpcomingBirthdaysForm(request.POST)
+
+    if not days:
+        context = {'contacts': None, 'form': form}
+        return render(request, 'contacts/upcoming_birthdays.html', context)
+    
+    days = int(days)
+    
     today = date.today()
 
     # Filter for birthdays in the range
@@ -38,7 +47,6 @@ def upcoming_birthdays(request):
     # Query the database
     contacts = Contact.objects.filter(query)
 
-    form = UpcomingBirthdaysForm(request.POST)
 
     context = {'contacts': contacts, 'form': form}
     if not contacts:
@@ -55,6 +63,10 @@ def create_or_edit_contact(request, contact_id=None):
         if form.is_valid():
             form.save()
             return redirect('contact_list')
+        elif form.has_error('phone_number'):
+            messages.error(request, 'Please enter correct phone number.')
+        elif form.has_error('email'):
+            messages.error(request, 'Please enter correct email.')
     else:
         form = ContactForm(instance=contact)
 
