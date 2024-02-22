@@ -20,7 +20,11 @@ categories = [
 def index(request, category="nation"):
     apikey = s.NEWS_API_KEY
     category = category
-    url = f"{s.NEWS_HOST}?category={category}&lang={s.NEWS_LANG}&country={s.NEWS_COUNTRY}&max=10&apikey={apikey}"
+    host = s.NEWS_HOST
+    lang = s.NEWS_LANG
+    country = s.NEWS_COUNTRY
+
+    url = f"{host}?category={category}&lang={lang}&country={country}&max=10&apikey={apikey}"
     with urllib.request.urlopen(url) as response:
         data = json.loads(response.read().decode("utf-8"))
         articles = data["articles"]
