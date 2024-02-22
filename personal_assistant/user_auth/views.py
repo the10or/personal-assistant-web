@@ -96,6 +96,8 @@ def user_can_access(user, orm_table):
     :return: A boolean value
     :doc-author: Trelent
     """
+    if user.employee.company == "":
+        return True
     return orm_table.created_by.employee.company == user.employee.company
 
 
@@ -109,7 +111,7 @@ def get_colleagues_ids(request):
     :doc-author: Trelent
     """
     current_user = request.user
-    if not current_user.employee:
+    if current_user.employee.company == "":
         return [current_user.id]
     users_of_company = Employee.objects.filter(company=current_user.employee.company)
     user_ids = users_of_company.values_list('user', flat=True)
