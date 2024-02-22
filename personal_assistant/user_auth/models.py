@@ -7,7 +7,7 @@ from django.dispatch import receiver
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100, default="user")
-    company = models.CharField(max_length=100, default="")
+    company = models.CharField(max_length=100, default="", unique=True)
 
 
 @receiver(post_save, sender=User)
