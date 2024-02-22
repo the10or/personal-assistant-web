@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "theme",
     "user_auth",
     "contacts",
+    "users_info"
 ]
 
 
