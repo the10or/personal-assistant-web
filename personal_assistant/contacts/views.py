@@ -62,7 +62,7 @@ def create_or_edit_contact(request, contact_id=None):
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect('contact_list')
+            return redirect('contacts:contact_list')
         elif form.has_error('phone_number'):
             messages.error(request, 'Please enter correct phone number.')
         elif form.has_error('email'):
@@ -94,4 +94,4 @@ def search_contacts(request):
 def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
     contact.delete()
-    return redirect('contact_list')
+    return redirect('contacts:contact_list')
