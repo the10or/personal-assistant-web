@@ -61,12 +61,16 @@ def create_or_edit_contact(request, contact_id=None):
     if request.method == 'POST':
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
-            form.save()
-            return redirect('contacts:contact_list')
-        elif form.has_error('phone_number'):
-            messages.error(request, 'Please enter correct phone number.')
-        elif form.has_error('email'):
-            messages.error(request, 'Please enter correct email.')
+            if Contact.objects.filter(email=form.cleaned_data['email']).exclude(pk=contact_id).exists():
+                messages.error(request, 'Contact with this email already exists.')
+            else:
+                form.save()
+                return redirect('contacts:contact_list')
+        else:
+            if 'phone_number' in form.errors:
+                messages.error(request, 'Please enter correct phone number.')
+            elif 'email' in form.errors:
+                messages.error(request, 'Please enter correct email.')
     else:
         form = ContactForm(instance=contact)
 
