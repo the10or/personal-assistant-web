@@ -65,7 +65,7 @@ def create_or_edit_contact(request, contact_id=None):
                 messages.error(request, 'Contact with this email already exists.')
             else:
                 form.save()
-                return redirect('contact_list')
+                return redirect('contacts:contact_list')
         else:
             if 'phone_number' in form.errors:
                 messages.error(request, 'Please enter correct phone number.')
