@@ -96,7 +96,7 @@ def user_can_access(user, orm_table):
     :return: A boolean value
     :doc-author: Trelent
     """
-    if user.employee.company == "":
+    if user.employee.company == "" or orm_table is None:
         return True
     return orm_table.created_by.employee.company == user.employee.company
 
