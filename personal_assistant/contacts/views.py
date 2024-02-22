@@ -98,4 +98,4 @@ def search_contacts(request):
 def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
     contact.delete()
-    return redirect('contact_list')
+    return redirect('contacts:contact_list')
