@@ -1,4 +1,6 @@
-FROM python:3.11.8
+FROM python:3.12.2-alpine
+
+RUN apk update && apk add bash
 
 ENV APP_HOME /app
 
