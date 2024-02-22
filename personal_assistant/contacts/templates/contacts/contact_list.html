@@ -25,6 +25,7 @@
                             <a class="text-red-500" href="{% url 'contacts:delete_contact' contact.id %}">Delete</a>
                         </div>
                     </div>
+                    <div class="text-slate-200 text-xs italic "> Created by: {{ contact.created_by.username }}</div>
                 </div>
                 {% endfor %}
         </div>
