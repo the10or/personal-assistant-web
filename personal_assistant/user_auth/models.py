@@ -19,4 +19,3 @@ def create_employee_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_employee_profile(sender, instance, **kwargs):
     instance.employee.save()
-    

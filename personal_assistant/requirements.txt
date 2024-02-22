@@ -1,0 +1,6 @@
+asgiref
+django-environ
+django
+psycopg2-binary
+sqlparse
+tzdata

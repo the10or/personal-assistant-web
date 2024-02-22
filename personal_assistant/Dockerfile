@@ -1,0 +1,17 @@
+FROM python:3.11.8
+
+ENV APP_HOME /app
+
+WORKDIR $APP_HOME
+
+COPY ./requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY .. .
+
+RUN chmod +x ./start.sh
+
+EXPOSE 8000
+
+# Use the script as the entry point
+ENTRYPOINT ["./start.sh"]
