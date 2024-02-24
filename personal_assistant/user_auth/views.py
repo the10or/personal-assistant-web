@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import (View)
 
-from .forms import (LoginForm,
+from user_auth.forms import (LoginForm,
                     RegisterForm)
+from user_auth.models import Employee
 
 
 def register(request):
@@ -82,3 +83,36 @@ class SignOutView(View):
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'user_auth/password_reset_confirm.html' 
     success_url = reverse_lazy("user_auth:password_reset_complete")
+
+
+
+def user_can_access(user, orm_table):
+    """
+    The user_can_access function checks if the user is allowed to access a orm_table.
+        It does this by checking if the company of the user matches that of the orm_table's creator.
+    
+    :param user: Check if the user is in the same company as the orm_table
+    :param orm_table: Get the company of the orm_table creator
+    :return: A boolean value
+    :doc-author: Trelent
+    """
+    if user.employee.company == "" or orm_table is None:
+        return True
+    return orm_table.created_by.employee.company == user.employee.company
+
+
+def get_colleagues_ids(request):
+    """
+    The get_colleagues_ids function returns a list of user ids for all users in the same company as the current user.
+        This is used to filter out any tasks that are not assigned to colleagues.
+    
+    :param request: Get the current user
+    :return: A list of user ids, which are integers
+    :doc-author: Trelent
+    """
+    current_user = request.user
+    if current_user.employee.company == "":
+        return [current_user.id]
+    users_of_company = Employee.objects.filter(company=current_user.employee.company)
+    user_ids = users_of_company.values_list('user', flat=True)
+    return user_ids

@@ -1,13 +1,31 @@
 services:
-  db:
+  postgres:
     image: postgres
     restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: ${DB_HOST}
+    env_file:
+      - ./personal_assistant/.env
+    networks:
+      - app-network
     ports:
       - "5432:5432"
-
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - personal-assistant-web_data:/var/lib/postgresql/data
+
+
+  django:
+    build:
+      context: ./personal_assistant
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    env_file:
+      - ./personal_assistant/.env
+
+
+volumes:
+  personal-assistant-web_data:
+
+networks:
+  app-network:
+    driver: bridge

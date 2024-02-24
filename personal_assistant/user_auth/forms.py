@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
                                        UsernameField, PasswordResetForm)
 from django.contrib.auth.models import User
+from user_auth.models import Employee
 from django.utils.translation import gettext_lazy as _
 
 form_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -47,7 +48,7 @@ class LoginForm(AuthenticationForm):
     )
 
     class Meta:
-        model = User
+        model = Employee
         fields = ["username", "password"]
 
 
