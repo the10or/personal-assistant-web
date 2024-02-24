@@ -8,7 +8,8 @@ from .forms import UserDescriptionForm
 @user_not_authenticated
 def contact_list(request):
     user = request.user
-    contacts = Contact.objects.order_by('-id')[:10]
+    contacts = Contact.objects.filter(created_by=user.id).order_by('-id')[:10]
+
     # user = User
     # print(user) 
     return render(request, 'users_info/dashboard.html', {'contacts': contacts, 'user' : user})
