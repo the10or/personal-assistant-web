@@ -5,4 +5,5 @@ __pycache__
 /data/
 /.env
 /contacts/__pycache__
-.pyc
+.pycq
+/personal_assistant/user_auth/migrations/
