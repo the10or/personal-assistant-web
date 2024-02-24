@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "theme",
     "user_auth",
     "contacts",
+    "users_info"
+    "news",
 ]
 
 
@@ -150,3 +152,9 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+NEWS_API_KEY = env("NEWS_API_KEY")
+NEWS_HOST = env("NEWS_HOST")
+NEWS_COUNTRY = env("NEWS_COUNTRY")
+NEWS_LANG = env("NEWS_LANG")
