@@ -9,11 +9,13 @@ WORKDIR $APP_HOME
 COPY ./requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY ./start.sh $APP_HOME/
+
 COPY .. .
 
 RUN chmod +x ./start.sh
-
+RUN ls -la
 EXPOSE 8000
 
 # Use the script as the entry point
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["/bin/bash", "start.sh"]

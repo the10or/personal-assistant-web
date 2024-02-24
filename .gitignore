@@ -10,3 +10,4 @@ __pycache__
 .pycq
 /personal_assistant/user_auth/migrations/
 
+/.vscode/
