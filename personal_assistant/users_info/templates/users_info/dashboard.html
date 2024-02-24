@@ -1,0 +1,30 @@
+{% block content %}
+
+
+<p>dashboard.html</p>
+
+{% if user.is_authenticated %}
+    <p> Hallo {{ user.username }} </p>
+    <p> Email: {{ user.email }} </p>
+{% endif %}
+
+<div>
+    <p>Description about user: {{ user.description }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Description</button>
+   
+    </form>
+
+</div>
+
+<div>
+    {% for contact in contacts %}
+    {{ contact }}
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
