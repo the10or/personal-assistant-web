@@ -1,0 +1,35 @@
+{% extends  'theme/base.html' %}
+
+{% block content %}
+  <h2>Note List</h2>
+
+  <form method="get" action="{% url 'note_list' %}">
+    <label for="tag_filter">Filter by Tag:</label>
+    <select name="tag_filter" id="tag_filter">
+      <option value="">All</option>
+      {% for tag in tags %}
+        <option value="{{ tag.name }}" {% if tag.name == request.GET.tag_filter %}selected{% endif %}>{{ tag.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="sort_by_tag">Sort by Tag:</label>
+    <input type="checkbox" name="sort_by_tag" id="sort_by_tag" {% if request.GET.sort_by_tag %}checked{% endif %}>
+
+    <button type="submit">Apply Filters</button>
+  </form>
+
+  <ul>
+    {% for note in notes %}
+      <li>
+        <h3>{{ note.title }}</h3>
+        <p>{{ note.content }}</p>
+        <p>Created by: {{ note.created_by.username }} | Created at: {{ note.created_at }}</p>
+        <p>Modified by: {{ note.modified_by.username }} | Modified at: {{ note.modified_at }}</p>
+        <p>Tags: {% for tag in note.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+        <a href="{% url 'edit_note' note.id %}">Edit</a>
+        <a href="{% url 'delete_note' note.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

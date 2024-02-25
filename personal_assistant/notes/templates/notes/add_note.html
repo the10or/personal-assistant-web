@@ -1,0 +1,27 @@
+{% extends 'theme/base.html' %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Add Note</h2>
+        <form method="post" action="{% url 'add_note' %}" class="col-md-6">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Title:</label>
+                {{ form.title }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Content:</label>
+                {{ form.content }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.tags.id_for_label }}">Tags:</label>
+                {{ form.tags }}
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+{% endblock %}
