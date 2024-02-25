@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Edit Note</h2>
-    <form method="post" action="{% url 'edit_note' note.id %}">
+    <form method="post" action="{% url 'notes:edit_note' note.id %}">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>

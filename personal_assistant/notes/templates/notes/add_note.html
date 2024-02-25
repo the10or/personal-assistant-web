@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container mt-4">
         <h2 class="mb-4">Add Note</h2>
-        <form method="post" action="{% url 'add_note' %}" class="col-md-6">
+        <form method="post" action="{% url 'notes:add_note' %}" class="col-md-6">
             {% csrf_token %}
             
             <div class="form-group">

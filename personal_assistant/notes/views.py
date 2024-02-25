@@ -30,7 +30,7 @@ def add_note(request):
             note.created_by = request.user
             note.save()
             form.save_m2m()  
-            return redirect('note_list')
+            return redirect('notes:note_list')
     else:
         form = NoteForm()
     return render(request, 'notes/add_note.html', {'form': form, 'tags': Tag.objects.all()})
@@ -45,7 +45,7 @@ def edit_note(request, note_id):
             note.modified_by = request.user
             note.save()
             form.save_m2m()  
-            return redirect('note_list')
+            return redirect('notes:note_list')
     else:
         form = NoteForm(instance=note)
     return render(request, 'notes/edit_note.html', {'form': form, 'note': note})
@@ -54,4 +54,4 @@ def edit_note(request, note_id):
 def delete_note(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     note.delete()
-    return redirect('note_list')
+    return redirect('notes:note_list')
