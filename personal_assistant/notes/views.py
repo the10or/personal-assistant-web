@@ -1,14 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note, Tag
 from .forms import NoteForm, TagForm
+from user_auth.views import get_colleagues_ids, user_can_access
 
 
 @login_required
 def note_list(request):
-    notes = Note.objects.filter(created_by=request.user)
+    colleagues_ids = get_colleagues_ids(request)
+    notes = Note.objects.filter(created_by__in=colleagues_ids)
     tags = Tag.objects.all()
 
     tag_filter = request.GET.get('tag_filter')
@@ -40,6 +43,8 @@ def add_note(request):
 @login_required
 def edit_note(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
+    if not user_can_access(request.user, note):
+        return HttpResponseForbidden()
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
@@ -56,6 +61,8 @@ def edit_note(request, note_id):
 @login_required
 def delete_note(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
+    if not user_can_access(request.user, note):
+        return HttpResponseForbidden()
     note.delete()
     return redirect('notes:note_list')
 
