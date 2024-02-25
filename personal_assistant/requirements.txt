@@ -4,3 +4,4 @@ django
 psycopg2-binary
 sqlparse
 tzdata
+pydantic

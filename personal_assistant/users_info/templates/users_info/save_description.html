@@ -1,7 +1,0 @@
-{% extends "users_info/dashboard.html" %}
-
-<form method="post" action="{% url 'save_description' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Description</button>
-</form>
