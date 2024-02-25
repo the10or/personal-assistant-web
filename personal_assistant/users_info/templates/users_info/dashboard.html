@@ -1,15 +1,35 @@
 {% extends 'theme/base.html' %}
 
 {% block content %}
-    {% include 'users_info/actions_menu.html' %}
 
     {% if user.is_authenticated %}
-        <p class="text-2xl font-bold">Your data:</p>
-        <p> Username: {{ user.username }} </p>
-        <p> First Name: {{ user.first_name }} </p>
-        <p> Last Name: {{ user.last_name }} </p>
-        <p> Email: {{ user.email }} </p>
-        <p> Department: {{ user.employee.department }} </p>
+<div>
+    <p class="text-2xl font-bold">Your data:</p>
+</div>
+
+<div>
+    <p> Username: {{ user.username }} </p>
+</div>
+
+<div>
+    <p> First Name: {{ user.first_name }} </p>
+    <a href="{% url 'users_info:edit_first_name' %}">edit</a>
+</div>
+
+<div>
+    <p> Last Name: {{ user.last_name }} </p>
+    <a href="{% url 'users_info:edit_last_name' %}">edit</a>
+</div>
+
+<div>
+    <p> Email: {{ user.email }} </p>
+    <a href="{% url 'users_info:edit_email' %}">edit</a>
+</div>
+
+<div>
+    <p> Department: {{ user.employee.department }} </p>
+</div>
+
         {% if user.employee.company%}
             <p> Company: {{ user.employee.company }} </p>
         {% else %}
