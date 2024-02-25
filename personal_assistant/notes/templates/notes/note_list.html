@@ -4,6 +4,7 @@
     <h2 class="text-center text-5xl mb-5">Note List</h2>
     <br>
     <p><a href="{% url 'notes:add_note' %}">Add new note</a></p>
+    <a href="{% url 'notes:add_tag' %}">Add new tag</a>
 
     <form method="get" action="{% url 'notes:note_list' %}">
         <label for="tag_filter">Filter by Tag:</label>

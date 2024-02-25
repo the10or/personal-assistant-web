@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from pydantic import Tag
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Note,Tag
-from .forms import NoteForm
+from .models import Note, Tag
+from .forms import NoteForm, TagForm
+
 
 @login_required
 def note_list(request):
@@ -29,11 +30,12 @@ def add_note(request):
             note = form.save(commit=False)
             note.created_by = request.user
             note.save()
-            form.save_m2m()  
+            form.save_m2m()
             return redirect('notes:note_list')
     else:
         form = NoteForm()
     return render(request, 'notes/add_note.html', {'form': form, 'tags': Tag.objects.all()})
+
 
 @login_required
 def edit_note(request, note_id):
@@ -44,14 +46,27 @@ def edit_note(request, note_id):
             note = form.save(commit=False)
             note.modified_by = request.user
             note.save()
-            form.save_m2m()  
+            form.save_m2m()
             return redirect('notes:note_list')
     else:
         form = NoteForm(instance=note)
     return render(request, 'notes/edit_note.html', {'form': form, 'note': note})
+
 
 @login_required
 def delete_note(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     note.delete()
     return redirect('notes:note_list')
+
+
+def add_tag(request):
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('notes:note_list')
+        else:
+            form = TagForm()
+            return render(request, 'notes/add_tag.html', {'form': form})
+    return render(request, 'notes/add_tag.html')
