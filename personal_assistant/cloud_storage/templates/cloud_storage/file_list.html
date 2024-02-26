@@ -2,6 +2,11 @@
 
 {% block content %}
     <h1>File list</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
 
     <a href="{% url 'upload' %}" class="link">back to Upload</a>
     <table>
