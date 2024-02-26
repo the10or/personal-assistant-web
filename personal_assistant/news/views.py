@@ -13,17 +13,20 @@ categories = [
     "entertainment",
     "sports",
     "science",
-    "health"
+    "health",
 ]
+
 
 def mock_json_response():
     # Return a static JSON response here
     return {
         "articles": [
             {"title": "Article 1", "content": "Content 1"},
-            {"title": "Article 2", "content": "Content 2"}
+            {"title": "Article 2", "content": "Content 2"},
         ]
     }
+
+
 def index(request, category="nation"):
     apikey = s.NEWS_API_KEY
     category = category
@@ -38,4 +41,6 @@ def index(request, category="nation"):
 
     articles = mock_json_response()["articles"]
 
-    return render(request, "news/index.html", {"articles": articles, "categories": categories})
+    return render(
+        request, "news/index.html", {"articles": articles, "categories": categories}
+    )

@@ -12,3 +12,4 @@ __pycache__
 
 /.vscode/
 
+/personal_assistant/google_cred.json

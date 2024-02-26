@@ -30,23 +30,24 @@ from .utils import get_file_extension, get_category_from_extension
 #         form = FileForm()
 #     return render(request, 'cloud_storage/upload.html', {'form': form})
 
+
 @login_required
 def upload(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             file_instance = form.save(commit=False)
             file_instance.user = request.user
 
-            file_extension = get_file_extension(request.FILES['file'])
+            file_extension = get_file_extension(request.FILES["file"])
             file_instance.category = get_category_from_extension(file_extension)
 
             file_instance.save()
-            messages.success(request, 'File uploaded successfully')
-            return redirect('file_list')
+            messages.success(request, "File uploaded successfully")
+            return redirect("file_list")
     else:
         form = FileForm()
-    return render(request, 'cloud_storage/upload.html', {'form': form})
+    return render(request, "cloud_storage/upload.html", {"form": form})
 
 
 @login_required
@@ -57,12 +58,12 @@ def file_list(request, category=None):
     else:
         files = File.objects.filter(user=user, category=category).all()
 
-    return render(request, 'cloud_storage/file_list.html', {'files': files})
+    return render(request, "cloud_storage/file_list.html", {"files": files})
 
 
 def delete_file(request, file_id):
-    if request.method == 'POST':
+    if request.method == "POST":
         file = File.objects.get(id=file_id)
         file.delete()
-        messages.success(request, 'File deleted successfully')
-    return redirect('file_list')
+        messages.success(request, "File deleted successfully")
+    return redirect("file_list")
