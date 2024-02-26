@@ -8,29 +8,6 @@ from .models import File
 from .utils import get_file_extension, get_category_from_extension
 
 
-# def upload(request):
-#     context = {}
-#     if request.method == "POST":
-#         file = request.FILES["upload_file"]
-#         fs = FileSystemStorage()
-#         filename = fs.save(file.name, file)
-#         url = fs.url(filename)
-#         context["url"] = url
-#     return render(request, "file_storage/upload.html", context)
-# @login_required
-# def upload(request):
-#     form = FileForm()
-#     if request.method == 'POST':
-#         form = FileForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'File uploaded successfully')
-#             return redirect('file_list')
-#     else:
-#         form = FileForm()
-#     return render(request, 'cloud_storage/upload.html', {'form': form})
-
-
 @login_required
 def upload(request):
     if request.method == "POST":
