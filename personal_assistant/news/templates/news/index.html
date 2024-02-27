@@ -1,32 +1,36 @@
 {% extends 'theme/base.html' %}
 {% block content %}
-<div class="mx-auto p-6">
-    <h3 class="mb-4 text-2xl font-semibold text-gray-900">Choose the news category:</h3>
-<div class="bg-white dark:bg-gray-700 flex gap-4 p-4 rounded-lg shadow">
-    {% for category in categories %}
-        <div class="bg-gray-100 dark:bg-gray-500 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300">
-            <a href="/{{ category }}" class="block p-2 text-center text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium">{{ category }}</a>
+    <div class="mx-auto p-6">
+        <h3 class="mb-4 text-2xl font-semibold text-gray-900">Choose the news category:</h3>
+        <div class="bg-white dark:bg-gray-700 flex gap-4 p-4 rounded-lg shadow">
+            {% for category in categories %}
+                <div class="bg-gray-100 dark:bg-gray-500 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300">
+                    <a href="/{{ category }}"
+                       class="block p-2 text-center text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium">{{ category }}</a>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
 
-</div>
+    </div>
     <div class="">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
 
             {% for article in articles %}
-            <div class="max-w-4xl mt-5 mb-5 mx-auto p-16 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-                <h1 class="mb-6 text-4xl font-bold text-gray-900 dark:text-white tracking-tight">{{ article.title }}</h1>
+                <div class="max-w-4xl mt-5 mb-5 mx-auto p-16 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
+                    <h1 class="mb-6 text-4xl font-bold text-gray-900 dark:text-white tracking-tight">{{ article.title }}</h1>
 
-                <h3 class="mb-4 text-xl text-gray-700 dark:text-gray-300 font-light">{{ article.description }}</h3>
-                <p class="mb-4 text-sm text-gray-600 dark:text-gray-400 font-light">{{ article.publishedAt }}</p>
+                    <h3 class="mb-4 text-xl text-gray-700 dark:text-gray-300 font-light">{{ article.description }}</h3>
+                    <p class="mb-4 text-sm text-gray-600 dark:text-gray-400 font-light">{{ article.publishedAt }}</p>
 
-                <img class="mb-6 w-full h-auto object-cover object-center rounded-lg shadow-md" alt="{{ article.title }}" src="{{ article.image }}">
+                    <img class="mb-6 w-full h-auto object-cover object-center rounded-lg shadow-md"
+                         alt="{{ article.title }}" src="{{ article.image }}">
 
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{ article.content }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{ article.content }}</p>
 
-                <a href="{{ article.url }}" class="inline-block mt-6 text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-300 dark:text-indigo-400 font-medium">читати далі →</a>
-            </div>
+                    <a href="{{ article.url }}"
+                       class="inline-block mt-6 text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-300 dark:text-indigo-400 font-medium">читати
+                        далі →</a>
+                </div>
 
 
             {% endfor %}

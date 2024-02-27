@@ -5,24 +5,30 @@ form_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
 
 
 class EditFirstNameForm(forms.Form):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': form_style}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": form_style}))
 
     class Meta:
         model = User
-        fields = ['first_name', ]
+        fields = [
+            "first_name",
+        ]
 
 
 class EditLastNameForm(forms.Form):
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': form_style}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": form_style}))
 
     class Meta:
         model = User
-        fields = ['last_name', ]
+        fields = [
+            "last_name",
+        ]
 
 
 class EditEmailForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': form_style}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": form_style}))
 
     class Meta:
         model = User
-        fields = ['email',]
+        fields = [
+            "email",
+        ]
