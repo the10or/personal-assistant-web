@@ -1,47 +1,47 @@
 {% extends 'theme/base.html' %}
 
 {% block content %}
-    <h1>File list</h1>
+<div class="form-content my-3 p-3">
+    <div class="pt-10 pb-3">
+            <h1 class="text-center text-5xl mb-5">Files list</h1>
+    </div>
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            <div class="p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">{{ message }}</div>
         {% endfor %}
     {% endif %}
 
-    <div>
-        <a href="{% url 'cloud_storage:upload' %}" class="link">Upload</a>
+    <div class="mb-4">
+        <a href="{% url 'cloud_storage:upload' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</a>
     </div>
 
-        <div>
-            <a href="{% url 'cloud_storage:file_list' %}">All</a></div>
-        <div>
-            <a href="{% url 'cloud_storage:file_list_category' 'documents' %}">Documents</a></div>
-        <div>
-            <a href="{% url 'cloud_storage:file_list_category' 'videos' %}">Videos</a></div>
-        <div>
-            <a href="{% url 'cloud_storage:file_list_category' 'audio' %}">Audio</a></div>
-        <div>
-            <a href="{% url 'cloud_storage:file_list_category' 'images' %}">Images</a></div>
-        <div>
-            <a href="{% url 'cloud_storage:file_list_category' 'other' %}">Other</a></div>
+    <div class="flex flex-wrap gap-2 mb-4">
+        <a href="{% url 'cloud_storage:file_list' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">All</a>
+        <a href="{% url 'cloud_storage:file_list_category' 'documents' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">Documents</a>
+        <a href="{% url 'cloud_storage:file_list_category' 'videos' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">Videos</a>
+        <a href="{% url 'cloud_storage:file_list_category' 'audio' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">Audio</a>
+        <a href="{% url 'cloud_storage:file_list_category' 'images' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">Images</a>
+        <a href="{% url 'cloud_storage:file_list_category' 'other' %}" class="bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded">Other</a>
+    </div>
 
-    <table>
-
-        <tbody>
+    <table class="min-w-full table-auto">
+        <tbody class="bg-white divide-y divide-gray-200">
         {% for file in files %}
-
             <tr>
-                <td>{{ file.file.name }}</td>
-                <td><a href="{{ file.file.url }}" target="_blank" class="link">Download</a></td>
-                <td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ file.file.name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <a href="{{ file.file.url }}" target="_blank" class="text-blue-600 hover:text-blue-900">Download</a>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
                     <form action="{% url 'cloud_storage:delete_file' file.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                     </form>
                 </td>
-
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div>
+
 {% endblock %}
