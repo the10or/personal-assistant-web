@@ -1,45 +1,48 @@
 {% extends  'theme/base.html' %}
 
 {% block content %}
-    <h2 class="text-center text-5xl mb-5">Note List</h2>
-    <br>
-    <p><a href="{% url 'notes:add_note' %}">Add new note</a></p>
-    <a href="{% url 'notes:add_tag' %}">Add new tag</a>
+<h2 class="text-center text-5xl mb-5">Note List</h2>
 
-    <form method="get" action="{% url 'notes:note_list' %}">
-        <label for="tag_filter">Filter by Tag:</label>
-        <select name="tag_filter" id="tag_filter">
+<div class="max-w-lg mx-auto mb-4">
+    <a href="{% url 'notes:add_note' %}" class="block text-blue-500 hover:text-blue-700 mb-2">Add new note</a>
+    <a href="{% url 'notes:add_tag' %}" class="block text-blue-500 hover:text-blue-700">Add new tag</a>
+</div>
+
+<form method="get" action="{% url 'notes:note_list' %}" class="max-w-lg mx-auto mb-4">
+    <div class="mb-4">
+        <label for="tag_filter" class="block text-gray-700 font-bold mb-2">Filter by Tag:</label>
+        <select name="tag_filter" id="tag_filter" class="block w-full border border-gray-300 rounded py-2 px-4 leading-tight focus:outline-none focus:border-blue-500">
             <option value="">All</option>
             {% for tag in tags %}
                 <option value="{{ tag.name }}"
                         {% if tag.name == request.GET.tag_filter %}selected{% endif %}>{{ tag.name }}</option>
             {% endfor %}
         </select>
-
-        <label for="sort_by_tag">Sort by Tag:</label>
-        <input type="checkbox" name="sort_by_tag" id="sort_by_tag" {% if request.GET.sort_by_tag %}checked{% endif %}>
-
-        <button type="submit">Apply Filters</button>
-    </form>
-    <div class="text-white grid grid-cols-4 gap-4 items-center mb-5 justify-center">
-        <ul>
-            {% for note in notes %}
-                <li>
-                    <div class="block p-5 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
-                        <h3 class="text-center text-blue-600 text-2xl">{{ note.title }}</h3>
-                        <p></p>
-                        <p>{{ note.content }}</p>
-                        <p>Created by: {{ note.created_by.username }} | Created at: {{ note.created_at }}</p>
-                        <p>Modified by: {{ note.modified_by.username }} | Modified at: {{ note.modified_at }}</p>
-                        <p>Tags: {% for tag in note.tags.all %}{{ tag.name }}{% if not forloop.last %},
-                        {% endif %}{% endfor %}</p>
-                        <a href="{% url 'notes:edit_note' note.id %}">Edit</a>
-                        <a href="{% url 'notes:delete_note' note.id %}">Delete</a>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
     </div>
+
+    <div class="mb-4 flex items-center">
+        <label for="sort_by_tag" class="text-gray-700 font-bold mr-2">Sort by Tag:</label>
+        <input type="checkbox" name="sort_by_tag" id="sort_by_tag" class="form-checkbox" {% if request.GET.sort_by_tag %}checked{% endif %}>
+    </div>
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Apply Filters</button>
+</form>
+
+<div class="text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-5 justify-center">
+    {% for note in notes %}
+        <div class="block p-5 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
+            <h3 class="text-center text-blue-600 text-2xl">{{ note.title }}</h3>
+            <p>{{ note.content }}</p>
+            <p>Created by: {{ note.created_by.username }} | Created at: {{ note.created_at }}</p>
+            <p>Modified by: {{ note.modified_by.username }} | Modified at: {{ note.modified_at }}</p>
+            <p>Tags: {% for tag in note.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            <a href="{% url 'notes:edit_note' note.id %}" class="text-blue-500 hover:text-blue-700">Edit</a>
+            <a href="{% url 'notes:delete_note' note.id %}" class="text-red-500 hover:text-blue-700">Delete</a>
+        </div>
+    {% endfor %}
+</div>
+
+
 
 
 {% endblock %}
