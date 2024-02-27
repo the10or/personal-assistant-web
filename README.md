@@ -52,3 +52,7 @@ To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 *Special thanks to the instructors, mentors and staff members at goIt for providing us with the knowledge and guidance that enabled us to create this project.*  
 
 **Thank you for choosing DRY_KISS PAL for your personal organization needs!**  
+
+This project is distributed under the [**MIT License**](https://opensource.org/license/MIT).
+
+
