@@ -73,7 +73,7 @@ def add_tag(request):
         if form.is_valid():
             form.save()
             return redirect('notes:note_list')
-        else:
-            form = TagForm()
-            return render(request, 'notes/add_tag.html', {'form': form})
+    else:
+        form = TagForm()
+        return render(request, 'notes/add_tag.html', {'form': form})
     return render(request, 'notes/add_tag.html')
