@@ -21,7 +21,7 @@ def upload(request):
 
             file_instance.save()
             messages.success(request, "File uploaded successfully")
-            return redirect("file_list")
+            return redirect("cloud_storage:file_list")
     else:
         form = FileForm()
     return render(request, "cloud_storage/upload.html", {"form": form})
@@ -38,9 +38,10 @@ def file_list(request, category=None):
     return render(request, "cloud_storage/file_list.html", {"files": files})
 
 
+@login_required
 def delete_file(request, file_id):
     if request.method == "POST":
         file = File.objects.get(id=file_id)
         file.delete()
         messages.success(request, "File deleted successfully")
-    return redirect("file_list")
+    return redirect("cloud_storage:file_list")
