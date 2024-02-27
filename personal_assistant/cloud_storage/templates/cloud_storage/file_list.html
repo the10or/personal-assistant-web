@@ -8,14 +8,22 @@
         {% endfor %}
     {% endif %}
 
-    <a href="{% url 'upload' %}" class="link">back to Upload</a>
+    <div>
+        <a href="{% url 'cloud_storage:upload' %}" class="link">Upload</a>
+    </div>
 
-        <div><a href="{% url 'file_list' %}">All</a></div>
-        <div><a href="{% url 'file_list_category' 'documents' %}">Documents</a></div>
-        <div><a href="{% url 'file_list_category' 'videos' %}">Videos</a></div>
-        <div><a href="{% url 'file_list_category' 'audio' %}">Audio</a></div>
-        <div><a href="{% url 'file_list_category' 'images' %}">Images</a></div>
-        <div><a href="{% url 'file_list_category' 'other' %}">Other</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list' %}">All</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list_category' 'documents' %}">Documents</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list_category' 'videos' %}">Videos</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list_category' 'audio' %}">Audio</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list_category' 'images' %}">Images</a></div>
+        <div>
+            <a href="{% url 'cloud_storage:file_list_category' 'other' %}">Other</a></div>
 
     <table>
 
@@ -26,7 +34,7 @@
                 <td>{{ file.file.name }}</td>
                 <td><a href="{{ file.file.url }}" target="_blank" class="link">Download</a></td>
                 <td>
-                    <form action="{% url 'delete_file' file.id %}" method="post">
+                    <form action="{% url 'cloud_storage:delete_file' file.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit">Delete</button>
                     </form>
