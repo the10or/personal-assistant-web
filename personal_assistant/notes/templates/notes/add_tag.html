@@ -1,6 +1,8 @@
 {% extends 'theme/base.html' %}
 
 {% block content %}
+            {% include 'notes/actions_menu.html' %}
+
     <form method="POST" action="{% url 'notes:add_tag' %}" class="max-w-lg mx-auto">
         {% csrf_token %}
         <div class="p-4">
