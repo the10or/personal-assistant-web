@@ -2,7 +2,7 @@
 Welcome to **DRY_KISS PAL** - Your Personal Assistant for Organizing Contacts, Notes, and Files!
 
 ## About **DRY_KISS PAL**  
-**DRY_KISS PAL** is a Django application developed by the **DRY_KISS.py** team, consisting of students from the Python **goIt** course. This project is designed to provide users with a personalized contact book, note-taking functionality, cloud storage for files categorized by users, and a digest of the latest news sorted by categories.
+**DRY_KISS PAL** is a Django application developed by the **DRY_KISS.py** team, consisting of students from the Python [**goIt**](https://goit.global/ua/) course. This project is designed to provide users with a personalized contact book, note-taking functionality, cloud storage for files categorized by users, and a digest of the latest news sorted by categories.
 
 ## Features
 - **Personalized Contact Book:** Keep track of your contacts with ease. Each user has their own dedicated contact book.
@@ -18,7 +18,7 @@ To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 1. Clone the repository: `git clone https://github.com/the10or/personal-assistant-web.git`
 2. Navigate to the project directory: `cd personal assistant`
 3. Run the application using Docker Compose with the `--build` flag for the first run to ensure that the application is built seamlessly: `docker-compose up --build`.  
-   *Note that for your convenience, all dependencies will be installed automatically and migrations will be applied during the Docker Compose build process. Subsequent runs can be performed without the --build flag.*
+   *Note that for your convenience, all dependencies will be installed automatically and migrations will be applied during the Docker Compose build process. Subsequent runs can be performed without the `--build` flag.*
 
 ## Usage
 - Sign Up/Log In: Create a new account or log in with your existing credentials.
