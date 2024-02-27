@@ -29,14 +29,14 @@ To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 - News Digest: Stay informed with the latest news, categorized for your convenience.
 
 ## Technologies Used
-- Python
-- Django
+- [Python](https://www.python.org/)
+- [Django](https://www.djangoproject.com/)
 - HTML/CSS
-- Tailwind CSS
-- PostgreSQL
-- Docker
+- [Tailwind CSS](https://tailwindcss.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Docker](https://www.docker.com/)
 - Docker Compose
-- Google Cloud Storage
+- [Google Cloud Storage](https://console.cloud.google.com/)
 
 
 ## Contributors
