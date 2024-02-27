@@ -17,7 +17,8 @@ To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/the10or/personal-assistant-web.git`
 2. Navigate to the project directory: `cd personal assistant`
-3. Run the application using Docker Compose with the `--build` flag for the first run to ensure that the application is built seamlessly: `docker-compose up --build`.  
+3. Be sure to create an *.env* file based on the provided *.env.example* file. You will also need to add a security key in JSON format to access Google Cloud services. Place these files in the root folder of the project, i.e. personal_assistant.  
+4. Run the application using Docker Compose with the `--build` flag for the first run to ensure that the application is built seamlessly: `docker-compose up --build`.  
    *Note that for your convenience, all dependencies will be installed automatically and migrations will be applied during the Docker Compose build process. Subsequent runs can be performed without the `--build` flag.*
 
 ## Usage
