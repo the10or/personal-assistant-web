@@ -26,4 +26,5 @@ urlpatterns = [
     path("auth/", include("user_auth.urls")),
     path("user/", include("users_info.urls")),
     path("notes/", include("notes.urls")),
+    path("upload/", include("cloud_storage.urls")),
 ]

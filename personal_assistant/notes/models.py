@@ -19,13 +19,14 @@ class Note(models.Model):
     modified_by = models.ForeignKey(
         "auth.User",
         on_delete=models.CASCADE,
-        related_name='modified_notes',
+        related_name="modified_notes",
         null=True,
-        blank=True)
+        blank=True,
+    )
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ["-created_at"]

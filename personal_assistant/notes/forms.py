@@ -11,7 +11,7 @@ class NoteForm(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['title', 'content', 'tags']
+        fields = ["title", "content", "tags"]
 
 
 class TagForm(forms.ModelForm):
@@ -19,4 +19,4 @@ class TagForm(forms.ModelForm):
 
     class Meta:
         model = Tag
-        fields = ['name']
+        fields = ["name"]
