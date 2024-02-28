@@ -1,12 +1,12 @@
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Note, Tag
-from .forms import NoteForm, TagForm
+from django.urls import reverse
 from user_auth.views import get_colleagues_ids, user_can_access
+
+from .forms import NoteForm, TagForm
+from .models import Note, Tag
 
 
 @login_required
@@ -75,20 +75,23 @@ def add_tag(request):
     if request.method == "POST":
         form = TagForm(request.POST)
         if form.is_valid():
-            tag_name = form.cleaned_data['name']
+            tag_name = form.cleaned_data["name"]
             if Tag.objects.filter(name=tag_name).exists():
-                messages.error(request, 'Tag already exists')
+                messages.error(request, "Tag already exists")
             else:
                 form.save()
-                return redirect("notes:note_list")
+                messages.success(request, "Tag added successfully")
+                return HttpResponseRedirect(
+                    reverse("notes:note_list") + "?message=Tag added successfully"
+                )
     else:
         form = TagForm()
     return render(request, "notes/add_tag.html", {"form": form})
 
+
 @login_required
 def details_note(request, note_id):
     note = Note.objects.filter(
-        id=note_id,
-        created_by__in=get_colleagues_ids(request)
+        id=note_id, created_by__in=get_colleagues_ids(request)
     ).first()
     return render(request, "notes/note_details.html", {"note": note})
