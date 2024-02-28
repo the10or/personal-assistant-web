@@ -9,7 +9,7 @@
   </div>
   <div class="mb-3">
     <p class="text-lg">
-      First Name: {{ user.first_name }}
+      First Name: <b>{{ user.first_name }}</b>
       <a href="{% url 'users_info:edit_first_name' %}" class="text-blue-500"
         >edit</a
       >
@@ -17,7 +17,7 @@
   </div>
   <div class="mb-3">
     <p class="text-lg">
-      Last Name: {{ user.last_name }}
+      Last Name: <b>{{ user.last_name }}</b>
       <a href="{% url 'users_info:edit_last_name' %}" class="text-blue-500"
         >edit</a
       >
@@ -25,7 +25,7 @@
   </div>
   <div class="mb-3">
     <p class="text-lg">
-      Email: {{ user.email }}
+      Email: <b>{{ user.email }}</b>
       <a href="{% url 'users_info:edit_email' %}" class="text-blue-500">edit</a>
     </p>
   </div>
