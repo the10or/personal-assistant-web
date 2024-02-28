@@ -1,6 +1,6 @@
 from contacts.models import Contact
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from users_info.forms import EditFirstNameForm, EditLastNameForm, EditEmailForm
 
 
@@ -23,6 +23,7 @@ def edit_first_name(request):
         user = request.user
         user.first_name = form["first_name"]
         user.save()
+        return redirect("users_info:dashboard_page")
     else:
         form = EditFirstNameForm()
     return render(request, "users_info/edit_first_name.html", {"form": form})
@@ -35,6 +36,7 @@ def edit_last_name(request):
         user = request.user
         user.last_name = form["last_name"]
         user.save()
+        return redirect("users_info:dashboard_page")
     else:
         form = EditLastNameForm()
     return render(request, "users_info/edit_last_name.html", {"form": form})
@@ -47,6 +49,7 @@ def edit_email(request):
         user = request.user
         user.email = form["email"]
         user.save()
+        return redirect("users_info:dashboard_page")
     else:
         form = EditEmailForm()
     return render(request, "users_info/edit_email.html", {"form": form})
