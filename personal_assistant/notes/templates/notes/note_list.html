@@ -39,7 +39,7 @@
 
             {% for note in notes %}
             <div class="block p-5 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
-                <h3 class="text-center text-blue-600 text-2xl">{{ note.title }}</h3>
+                <a href="{{ note.id }}"><h3 class="text-center text-blue-600 text-2xl">{{ note.title }}</h3></a>
                 <p>{{ note.content }}</p>
                 <p>Created by: {{ note.created_by.username }} | Created at: {{ note.created_at }}</p>
                 <p>Modified by: {{ note.modified_by.username }} | Modified at: {{ note.modified_at }}</p>

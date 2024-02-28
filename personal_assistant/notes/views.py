@@ -69,6 +69,7 @@ def delete_note(request, note_id):
     return redirect("notes:note_list")
 
 
+@login_required
 def add_tag(request):
     if request.method == "POST":
         form = TagForm(request.POST)
@@ -78,3 +79,12 @@ def add_tag(request):
     else:
         form = TagForm()
         return render(request, "notes/add_tag.html", {"form": form})
+
+
+@login_required
+def details_note(request, note_id):
+    note = Note.objects.filter(
+        id=note_id,
+        created_by__in=get_colleagues_ids(request)
+    ).first()
+    return render(request, "notes/note_details.html", {"note": note})
