@@ -131,3 +131,10 @@ def delete_contact(request, contact_id):
     contact = get_object_or_404(Contact, pk=contact_id)
     contact.delete()
     return redirect("contacts:contact_list")
+
+
+@login_required
+def contact_details(request, contact_id: int):
+    colleagues_ids = get_colleagues_ids(request)
+    contact = Contact.objects.filter(id=contact_id, created_by__in=colleagues_ids).first()
+    return render(request, "contacts/contact_details.html", {"contact": contact})

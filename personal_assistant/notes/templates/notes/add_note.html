@@ -1,9 +1,13 @@
 {% extends 'theme/base.html' %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h2 class="text-5xl text-center">Add Note</h2>
-        <form method="post" action="{% url 'notes:add_note' %}" class="max-w-lg mx-auto">
+<div class="flex items-center justify-center pt-10 pb-3">
+    <h1 class="text-5xl mb-5">Add Note</h1>
+</div>
+
+            {% include 'notes/actions_menu.html' %}
+    <div class="flex">
+        <form method="post" action="{% url 'notes:add_note' %}" class="max-w-sm mx-auto mt-4">
             {% csrf_token %}
 
             <div class="mb-4">

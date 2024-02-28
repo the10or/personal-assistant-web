@@ -14,8 +14,12 @@
         <div class="text-white grid grid-cols-4 gap-4 items-center mb-5 justify-center">
                 {% for contact in contacts %}
                 <div class="block p-5 bg-slate-600 border border-gray-200 rounded-lg shadow hover:bg-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800 dark:hover:border-gray-200">
-                    <div class="text-xl">{{ contact.first_name }} {{ contact.last_name }}</div>
-                    <div class="text-slate-200 italic ">{{ contact.phone_number }}</div>
+                    <a href="{{ contact.id }}" class="inline-block">
+                        <div class="text-xl">{{ contact.first_name }} {{ contact.last_name }}
+
+                        </div>
+                    </a>
+                    <div class="text-slate-400 italic ">{{ contact.phone_number }}</div>
                     <div class="pt-2 flex flex-row float-right">
 
                         <div class="inline pr-2 pl-2">
@@ -25,7 +29,6 @@
                             <a class="text-red-500" href="{% url 'contacts:delete_contact' contact.id %}">Delete</a>
                         </div>
                     </div>
-                    <div class="text-slate-200 text-xs italic "> Created by: {{ contact.created_by.username }}</div>
                 </div>
                 {% endfor %}
         </div>
