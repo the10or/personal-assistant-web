@@ -12,6 +12,10 @@ Welcome to **DRY_KISS PAL** - Your Personal Assistant for Organizing Contacts, N
 ## Installation with Docker Compose  
 
   *We've taken care to make the installation and launch process as convenient as possible, so you can focus on using **DRY_KISS PAL** to organize your contacts, notes, and files effortlessly.*  
+
+To take advantage of **DRY_KISS PAL's** capabilities with **Docker Compose**, first make sure you have **Docker** installed and the **Docker daemon** running on your system.
+Install **Docker** if it is not already installed. Instructions for installing **Docker** can be found on the official [Docker website](https://www.docker.com/). 
+Make sure the **Docker daemon** is running on your system. Once **Docker** is installed and the daemon is running you are ready to use our application.
   
 To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 
@@ -47,12 +51,14 @@ To install and run **DRY_KISS PAL** using Docker Compose, follow these steps:
 - [Serhii Koval](https://github.com/the10or/)
 
 ## Support or Contact
-*For any inquiries or support regarding **DRY_KISS PAL**, feel free to contact us at .*
+*For any inquiries or support regarding **DRY_KISS PAL**, feel free to contact us at https://github.com/the10or/personal-assistant-web/*
 
 *Special thanks to the instructors, mentors and staff members at goIt for providing us with the knowledge and guidance that enabled us to create this project.*  
 
 **Thank you for choosing DRY_KISS PAL for your personal organization needs!**  
 
 This project is distributed under the [**MIT License**](https://opensource.org/license/MIT).
+
+
 
 
