@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.decorators import login_required
@@ -74,12 +75,15 @@ def add_tag(request):
     if request.method == "POST":
         form = TagForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect("notes:note_list")
+            tag_name = form.cleaned_data['name']
+            if Tag.objects.filter(name=tag_name).exists():
+                messages.error(request, 'Tag already exists')
+            else:
+                form.save()
+                return redirect("notes:note_list")
     else:
         form = TagForm()
-        return render(request, "notes/add_tag.html", {"form": form})
-
+    return render(request, "notes/add_tag.html", {"form": form})
 
 @login_required
 def details_note(request, note_id):
