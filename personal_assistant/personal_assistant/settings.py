@@ -84,14 +84,12 @@ WSGI_APPLICATION = "personal_assistant.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db.sqlite3",
-        # "ENGINE": "django.db.backends.postgresql_psycopg2",
-        # "NAME": env("POSTGRES_DB"),
-        # "USER": env("POSTGRES_USER"),
-        # "PASSWORD": env("POSTGRES_PASSWORD"),
-        # "HOST": env("DB_HOST"),
-        # "PORT": env("DB_PORT"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
