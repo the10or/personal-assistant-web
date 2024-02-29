@@ -136,5 +136,7 @@ def delete_contact(request, contact_id):
 @login_required
 def contact_details(request, contact_id: int):
     colleagues_ids = get_colleagues_ids(request)
-    contact = Contact.objects.filter(id=contact_id, created_by__in=colleagues_ids).first()
+    contact = Contact.objects.filter(
+        id=contact_id, created_by__in=colleagues_ids
+    ).first()
     return render(request, "contacts/contact_details.html", {"contact": contact})
